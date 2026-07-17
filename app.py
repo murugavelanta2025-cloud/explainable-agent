@@ -3,8 +3,7 @@ import google.generativeai as genai
 
 genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 
-model = genai.GenerativeModel("gemini-2.0-flash") 
-
+model = genai.GenerativeModel("gemini-2.0-flash")
 
 st.title("💰 Autonomous Financial Advisor")
 
@@ -71,6 +70,7 @@ Provide:
 
 Explain everything clearly.
 """
+
     try:
         response = model.generate_content(prompt)
 
@@ -79,8 +79,83 @@ Explain everything clearly.
         st.markdown(response.text)
 
     except Exception as e:
-        st.error(f"Error: {e}")
 
-        
+        st.warning("Gemini API unavailable. Showing default recommendation.")
 
-    
+        if risk == "Low":
+            st.success("""
+Investor Profile Analysis:
+Conservative Investor
+
+Recommended Portfolio:
+60% Fixed Deposits
+30% Debt Mutual Funds
+10% Gold
+
+Detailed Reasoning:
+• Focus on capital protection
+• Lower market volatility
+• Suitable for risk-averse investors
+
+Alternative Options Considered:
+• Government Bonds
+• Recurring Deposits
+
+Risk Assessment:
+Low Risk
+
+Confidence Score:
+85%
+""")
+
+        elif risk == "Medium":
+            st.success("""
+Investor Profile Analysis:
+Balanced Investor
+
+Recommended Portfolio:
+50% Index Funds
+30% Blue-chip Stocks
+20% Gold
+
+Detailed Reasoning:
+• Balanced risk and return
+• Diversified portfolio
+• Suitable for long-term growth
+
+Alternative Options Considered:
+• Hybrid Mutual Funds
+• Corporate Bonds
+
+Risk Assessment:
+Medium Risk
+
+Confidence Score:
+82%
+""")
+
+        else:
+            st.success("""
+Investor Profile Analysis:
+Aggressive Investor
+
+Recommended Portfolio:
+70% Stocks
+20% Index Funds
+10% Gold
+
+Detailed Reasoning:
+• Higher return potential
+• Long-term wealth creation
+• Suitable for high risk tolerance
+
+Alternative Options Considered:
+• Sectoral Funds
+• International ETFs
+
+Risk Assessment:
+High Risk
+
+Confidence Score:
+80%
+""")
