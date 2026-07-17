@@ -80,7 +80,7 @@ Explain everything clearly.
 
     except Exception as e:
 
-        st.warning("Gemini API unavailable. Showing default recommendation.")
+        
 
         if risk == "Low":
             st.success("""
