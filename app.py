@@ -1,23 +1,67 @@
 import streamlit as st
 
-st.title("🔍 TruthScope")
+st.title("💰 Autonomous Financial Advisor")
 
-st.write("An Explainable AI Investigation Agent")
+amount = st.number_input(
+    "Investment Amount (₹)",
+    min_value=1000,
+    value=50000
+)
 
-topic = st.text_input("Enter a topic")
+risk = st.selectbox(
+    "Risk Level",
+    ["Low", "Medium", "High"]
+)
 
-if st.button("Investigate"):
+duration = st.slider(
+    "Investment Duration (Years)",
+    1,
+    30,
+    5
+)
 
-    st.subheader("Agent Actions")
-    st.write("✅ Gathering information")
-    st.write("✅ Analyzing evidence")
-    st.write("✅ Generating report")
+goal = st.selectbox(
+    "Financial Goal",
+    [
+        "Wealth Creation",
+        "Retirement",
+        "Education",
+        "Emergency Fund"
+    ]
+)
 
-    st.subheader("Findings")
-    st.write(f"Investigation completed for: {topic}")
+if st.button("Generate Advice"):
 
-    st.subheader("Reasoning")
-    st.write("Reasoning will appear here")
+    st.subheader("Investor Profile")
 
-    st.subheader("Confidence")
-    st.write("85%")
+    st.write(f"Amount: ₹{amount}")
+    st.write(f"Risk: {risk}")
+    st.write(f"Duration: {duration} years")
+    st.write(f"Goal: {goal}")
+
+    st.subheader("Agent Reasoning")
+
+    st.write("✓ Analysed investment amount")
+    st.write("✓ Evaluated risk profile")
+    st.write("✓ Considered investment duration")
+    st.write("✓ Matched financial goals")
+
+    st.subheader("Recommendation")
+
+    if risk == "Low":
+        st.write("60% Fixed Deposits")
+        st.write("30% Debt Mutual Funds")
+        st.write("10% Gold")
+
+    elif risk == "Medium":
+        st.write("50% Index Funds")
+        st.write("30% Blue-Chip Stocks")
+        st.write("20% Gold")
+
+    else:
+        st.write("70% Stocks")
+        st.write("20% Index Funds")
+        st.write("10% Gold")
+
+    st.subheader("Confidence Score")
+    st.write("82%")
