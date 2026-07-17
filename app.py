@@ -1,4 +1,9 @@
 import streamlit as st
+import google.generativeai as genai
+
+genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
+
+model = genai.GenerativeModel("gemini-2.5-flash")
 
 st.title("💰 Autonomous Financial Advisor")
 
@@ -46,22 +51,26 @@ if st.button("Generate Advice"):
     st.write("✓ Considered investment duration")
     st.write("✓ Matched financial goals")
 
-    st.subheader("Recommendation")
+    prompt = f"""
+You are an Autonomous Financial Advisor.
 
-    if risk == "Low":
-        st.write("60% Fixed Deposits")
-        st.write("30% Debt Mutual Funds")
-        st.write("10% Gold")
+Investment Amount: ₹{amount}
+Risk Level: {risk}
+Investment Duration: {duration} years
+Financial Goal: {goal}
 
-    elif risk == "Medium":
-        st.write("50% Index Funds")
-        st.write("30% Blue-Chip Stocks")
-        st.write("20% Gold")
+Provide:
 
-    else:
-        st.write("70% Stocks")
-        st.write("20% Index Funds")
-        st.write("10% Gold")
+1. Investor Profile Analysis
+2. Recommended Portfolio Allocation
+3. Detailed Reasoning
+4. Alternative Options Considered
+5. Risk Assessment
+6. Confidence Score (%)
 
-    st.subheader("Confidence Score")
-    st.write("82%")
+Explain everything clearly.
+"""
+
+    response = model.generate_content(prompt)
+
+    st.markdown(response.text)
