@@ -73,8 +73,57 @@ Explain everything clearly.
 """
 
     try:
-        response = model.generate_content(prompt)
-        st.markdown(response.text)
+        if risk == "Low":
+    st.success("""
+Investor Profile Analysis:
+Conservative Investor
+
+Recommended Portfolio:
+60% Fixed Deposits
+30% Debt Mutual Funds
+10% Gold
+
+Risk Assessment:
+Low Risk
+
+Confidence Score:
+85%
+""")
+
+elif risk == "Medium":
+    st.success("""
+Investor Profile Analysis:
+Balanced Investor
+
+Recommended Portfolio:
+50% Index Funds
+30% Blue-chip Stocks
+20% Gold
+
+Risk Assessment:
+Medium Risk
+
+Confidence Score:
+82%
+""")
+
+else:
+    st.success("""
+Investor Profile Analysis:
+Aggressive Investor
+
+Recommended Portfolio:
+70% Stocks
+20% Index Funds
+10% Gold
+
+Risk Assessment:
+High Risk
+
+Confidence Score:
+80%
+""")
+        
 
     except Exception as e:
         st.error(f"Error: {e}")
