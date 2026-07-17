@@ -35,7 +35,7 @@ goal = st.selectbox(
     ]
 )
 
-if st.button("Generate Advice"):
+ if st.button("Generate Advice"):
 
     st.subheader("Investor Profile")
 
@@ -70,9 +70,10 @@ Provide:
 
 Explain everything clearly.
 """
-try:
-    response = model.generate_content(prompt)
-    st.markdown(response.text)
 
-except Exception as e:
-    st.error(f"Error: {e}")
+    try:
+        response = model.generate_content(prompt)
+        st.markdown(response.text)
+
+    except Exception as e:
+        st.error(f"Error: {e}")
