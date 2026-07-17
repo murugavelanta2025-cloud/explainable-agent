@@ -35,7 +35,7 @@ goal = st.selectbox(
     ]
 )
 
- if st.button("Generate Advice"):
+if st.button("Generate Advice"):
 
     st.subheader("Investor Profile")
 
